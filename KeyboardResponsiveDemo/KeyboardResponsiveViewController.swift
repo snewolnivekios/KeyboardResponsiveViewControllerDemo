@@ -26,15 +26,17 @@ import UIKit
 extension UIViewController {
 
   /// Returns the text field currently identified as the view's first responder, or `nil` if there is no such first responder.
-  func activeTextField(view: UIView?) -> UITextField? {
+  func activeTextField(within view: UIView?) -> UITextField? {
 
-    if (view?.isFirstResponder) == true {
+    guard let view = view else { return nil }
+
+    if (view.isFirstResponder) == true {
       return view as? UITextField
     }
 
-    for view in view!.subviews {
-      if let atf = activeTextField(view: view) {
-        return atf
+    for view in view.subviews {
+      if let activeTextField = activeTextField(within: view) {
+        return activeTextField
       }
     }
 
@@ -48,7 +50,7 @@ extension UIViewController {
     // The distance between the bottom of the text field and the top of the keyboard
     let gap: CGFloat = 20
 
-    if let activeTextField = activeTextField(view: view),
+    if let activeTextField = activeTextField(within: view),
       let keyboardFrame = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
 
       // Calculate delta between upper boundary of keyboard and lower boundary of text field

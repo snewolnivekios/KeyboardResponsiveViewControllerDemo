@@ -38,7 +38,7 @@ class ContactViewController: UIViewController, UITextFieldDelegate {
 
   /// Deactivates keyboard responsiveness to text fields.
   override func viewWillDisappear(_ animated: Bool) {
-    view.endEditing(true)
+    view.endEditing(true) // ensure smooth keyboard presentation
     deactivateKeyboardResponsiveTextFields()
   }
 
@@ -46,7 +46,7 @@ class ContactViewController: UIViewController, UITextFieldDelegate {
   /// Positions message text at the top of its content.
   override func viewWillLayoutSubviews() {
     messageTextView.layer.cornerRadius = 5
-    messageTextView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
+    messageTextView.setContentOffset(CGPoint(x: 0, y: 0), animated: false) // position the leading content at the top of the view
   }
 
 

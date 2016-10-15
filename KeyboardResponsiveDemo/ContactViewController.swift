@@ -21,26 +21,10 @@
 import UIKit
 
 /// Manages data entry on the contact info view, submitting the form upon entry of the last field.
-class ContactViewController: UIViewController, UITextFieldDelegate {
+class ContactViewController: KeyboardResponsiveViewController {
 
+  /// Demo text view customized in `viewWillLayoutSubviews()`
   @IBOutlet weak var messageTextView: UITextView!
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-  }
-
-
-  /// Activates keyboard responsiveness to text fields.
-  override func viewDidAppear(_ animated: Bool) {
-    activateKeyboardResponsiveTextFields()
-  }
-
-
-  /// Deactivates keyboard responsiveness to text fields.
-  override func viewWillDisappear(_ animated: Bool) {
-    view.endEditing(true) // ensure smooth keyboard presentation
-    deactivateKeyboardResponsiveTextFields()
-  }
 
 
   /// Positions message text at the top of its content.

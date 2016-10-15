@@ -21,28 +21,18 @@
 import UIKit
 
 /// Manages data entry on the contact info view, submitting the form upon entry of the last field.
-class SecurityViewController: UIViewController, UITextFieldDelegate {
+class SecurityViewController: KeyboardResponsiveViewController {
 
+  /// Demo text view customized in `viewWillLayoutSubviews()`
   @IBOutlet weak var messageTextView: UITextView!
-
-  override func viewDidLoad() {
-    super.viewDidLoad()
-  }
 
 
   /// Activates keyboard responsiveness to text fields and initiates editing of the first text field.
   override func viewDidAppear(_ animated: Bool) {
-    activateKeyboardResponsiveTextFields()
+    super.viewDidAppear(animated)
     if let firstTextField = view.viewWithTag(1) as? UITextField {
       firstTextField.becomeFirstResponder()
     }
-  }
-
-
-  /// Deactivates keyboard responsiveness to text fields.
-  override func viewWillDisappear(_ animated: Bool) {
-    view.endEditing(true) // ensure smooth keyboard presentation
-    deactivateKeyboardResponsiveTextFields()
   }
 
 

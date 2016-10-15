@@ -20,27 +20,23 @@
 
 import UIKit
 
+/// A view controller that animates the active text field into view if obscured by the keyboard.
+class KeyboardResponsiveViewController: UIViewController, UITextFieldDelegate {
 
-// MARK: - Keyboard Responsive View Controller Extension
+  
+  /// The text field currently identified as the view's first responder, or `nil` if there is no such first responder.
+  var activeTextField: UITextField?
 
-extension UIViewController {
 
-  /// Returns the text field currently identified as the view's first responder, or `nil` if there is no such first responder.
-  func activeTextField(within view: UIView?) -> UITextField? {
+  /// Records the given `textField` as the one that is currently active.
+  func textFieldDidBeginEditing(_ textField: UITextField) {
+    activeTextField = textField
+  }
 
-    guard let view = view else { return nil }
 
-    if (view.isFirstResponder) == true {
-      return view as? UITextField
-    }
-
-    for view in view.subviews {
-      if let activeTextField = activeTextField(within: view) {
-        return activeTextField
-      }
-    }
-
-    return nil
+  /// Records the absence of any currently active text field.
+  func textFieldDidEndEditing(_ textField: UITextField) {
+    activeTextField = nil
   }
 
 
@@ -50,7 +46,7 @@ extension UIViewController {
     // The distance between the bottom of the text field and the top of the keyboard
     let gap: CGFloat = 20
 
-    if let activeTextField = activeTextField(within: view),
+    if let activeTextField = activeTextField,
       let keyboardFrame = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
 
       // Calculate delta between upper boundary of keyboard and lower boundary of text field
@@ -96,5 +92,20 @@ extension UIViewController {
   func deactivateKeyboardResponsiveTextFields() {
     NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
     NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+  }
+
+
+  /// Activates keyboard responsiveness to text fields.
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    activateKeyboardResponsiveTextFields()
+  }
+
+
+  /// Deactivates keyboard responsiveness to text fields.
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    view.endEditing(true) // ensure smooth keyboard presentation
+    deactivateKeyboardResponsiveTextFields()
   }
 }

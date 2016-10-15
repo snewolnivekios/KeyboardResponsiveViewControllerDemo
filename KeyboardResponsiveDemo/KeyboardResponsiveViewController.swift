@@ -49,23 +49,25 @@ extension UIViewController {
     let gap: CGFloat = 20
 
     if let activeTextField = activeTextField(view: view),
-      let kbFrame = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+      let keyboardFrame = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
 
-      let tfFrame = activeTextField.superview!.convert(activeTextField.frame, to: view)
-      let tfY = tfFrame.origin.y + tfFrame.size.height + gap
-      let kbY = kbFrame.origin.y
-      let deltaY = min(kbY - tfY, 0)
-      var vwFrame = view.frame
-      vwFrame.origin.y += deltaY - vwFrame.origin.y
+      // Calculate delta between upper boundary of keyboard and lower boundary of text field
+      let textFieldFrame = activeTextField.superview!.convert(activeTextField.frame, to: view)
+      let textFieldBound = textFieldFrame.origin.y + textFieldFrame.size.height + gap
+      let keyboardBound = keyboardFrame.origin.y
+      let viewShift = min(keyboardBound - textFieldBound, 0) // Don't shift if keyboard doesn't cross text field boundary
 
+      // Shift the view
+      var viewFrame = view.frame
+      viewFrame.origin.y += viewShift - viewFrame.origin.y // Account for previous shift
       UIView.animate(withDuration: 0.5) {
-        self.view.frame = vwFrame
+        self.view.frame = viewFrame
       }
     }
   }
 
 
-  /// In response to keyboard presentation, animates the view back to its original position.
+  /// In response to keyboard dismissal, animates the view back to its original position.
   func keyboardWillHide(_ notification: NSNotification) {
     var vwFrame = view.frame
     vwFrame.origin.y = 0

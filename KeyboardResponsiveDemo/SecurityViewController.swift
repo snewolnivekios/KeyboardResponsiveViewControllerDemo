@@ -30,11 +30,19 @@ class SecurityViewController: UIViewController, UITextFieldDelegate {
   }
 
 
-  /// Begins editing the first text field.
+  /// Activates keyboard responsiveness to text fields and initiates editing of the first text field.
   override func viewDidAppear(_ animated: Bool) {
+    activateKeyboardResponsiveTextFields()
     if let firstTextField = view.viewWithTag(1) as? UITextField {
       firstTextField.becomeFirstResponder()
     }
+  }
+
+
+  /// Deactivates keyboard responsiveness to text fields.
+  override func viewWillDisappear(_ animated: Bool) {
+    view.endEditing(true)
+    deactivateKeyboardResponsiveTextFields()
   }
 
 

@@ -30,6 +30,19 @@ class ContactViewController: UIViewController, UITextFieldDelegate {
   }
 
 
+  /// Activates keyboard responsiveness to text fields.
+  override func viewDidAppear(_ animated: Bool) {
+    activateKeyboardResponsiveTextFields()
+  }
+
+
+  /// Deactivates keyboard responsiveness to text fields.
+  override func viewWillDisappear(_ animated: Bool) {
+    view.endEditing(true)
+    deactivateKeyboardResponsiveTextFields()
+  }
+
+
   /// Positions message text at the top of its content.
   override func viewWillLayoutSubviews() {
     messageTextView.layer.cornerRadius = 5
@@ -38,10 +51,6 @@ class ContactViewController: UIViewController, UITextFieldDelegate {
 
 
   /// Advances to the next text field as identified by sequential and contiguous `tag` values, or segues to the next view if there is no follow-on tag.
-  ///
-  /// - parameter textField: The text field losing focus.
-  ///
-  /// - returns: `true` in all cases.
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     if let nextTextField = view.viewWithTag(textField.tag + 1) {
       nextTextField.becomeFirstResponder()
@@ -53,8 +62,6 @@ class ContactViewController: UIViewController, UITextFieldDelegate {
 
 
   /// Dismisses the keyboard in response to a tap gesture.
-  ///
-  /// - parameter sender: The tap gesture recognizer.
   @IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
     view.endEditing(true)
   }

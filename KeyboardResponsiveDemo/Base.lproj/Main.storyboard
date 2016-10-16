@@ -208,9 +208,6 @@
                             <constraint firstAttribute="trailingMargin" secondItem="wBl-H8-lO8" secondAttribute="trailing" id="Zy5-ii-cu4"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="wBl-H8-lO8" secondAttribute="bottom" constant="20" id="dAW-7b-ula"/>
                         </constraints>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="Rbv-cx-bUA" appends="YES" id="nKz-jq-yR4"/>
-                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Contact Info" id="TvJ-ha-ed9"/>
                     <connections>
@@ -218,11 +215,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="Rbv-cx-bUA">
-                    <connections>
-                        <action selector="dismissKeyboard:" destination="BYZ-38-t0r" id="9pi-Xb-MXD"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1076" y="138.98050974512745"/>
         </scene>
@@ -455,20 +447,12 @@
                             <constraint firstItem="dXg-Nl-zth" firstAttribute="leading" secondItem="Ff5-Qo-1KK" secondAttribute="leadingMargin" id="LkS-EG-R8S"/>
                             <constraint firstItem="chf-Zk-a2h" firstAttribute="top" secondItem="8gJ-xS-nHb" secondAttribute="bottom" constant="20" id="uMZ-ep-2mn"/>
                         </constraints>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="GfY-Gc-Wcp" appends="YES" id="x8e-8K-GGs"/>
-                        </connections>
                     </view>
                     <connections>
                         <outlet property="messageTextView" destination="vgQ-2V-3sQ" id="h1g-hX-ytc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z7r-sX-4Uz" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="GfY-Gc-Wcp">
-                    <connections>
-                        <action selector="dismissKeyboard:" destination="ytN-yH-Jw3" id="RTz-RQ-bo4"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1880.8" y="138.98050974512745"/>
         </scene>

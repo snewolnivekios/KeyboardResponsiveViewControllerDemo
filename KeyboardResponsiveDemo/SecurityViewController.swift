@@ -59,12 +59,4 @@ class SecurityViewController: UIViewController, UITextFieldDelegate {
     }
     return true
   }
-
-
-  /// Dismisses the keyboard in response to a tap gesture.
-  ///
-  /// - parameter sender: The tap gesture recognizer.
-  @IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
-    view.endEditing(true)
-  }
 }

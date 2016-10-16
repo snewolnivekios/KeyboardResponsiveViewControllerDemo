@@ -56,11 +56,5 @@ class ContactViewController: UIViewController, UITextFieldDelegate {
     }
     return true
   }
-
-
-  /// Dismisses the keyboard in response to a tap gesture.
-  @IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
-    view.endEditing(true)
-  }
 }
 

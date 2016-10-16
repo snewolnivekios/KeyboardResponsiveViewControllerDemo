@@ -21,7 +21,10 @@
 import UIKit
 
 /// Manages data entry on the contact info view, submitting the form upon entry of the last field.
-class SecurityViewController: KeyboardResponsiveViewController {
+class SecurityViewController: KeyboardResponsiveViewController, TextFieldAdvancing {
+
+  /// The segue activated when the user taps Enter on the last text field.
+  var textFieldSegueIdentifier: String? = "thankYou"
 
   /// Demo text view customized in `viewWillLayoutSubviews()`
   @IBOutlet weak var messageTextView: UITextView!
@@ -40,24 +43,5 @@ class SecurityViewController: KeyboardResponsiveViewController {
   override func viewWillLayoutSubviews() {
     messageTextView.layer.cornerRadius = 5
     messageTextView.setContentOffset(CGPoint(x: 0, y: 0), animated: false) // position the leading content at the top of the view
-  }
-
-
-  /// Advances to the next text field as identified by sequential and contiguous `tag` values, or segues to the next view if there is no follow-on tag.
-  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    if let nextTextField = view.viewWithTag(textField.tag + 1) {
-      nextTextField.becomeFirstResponder()
-    } else {
-      performSegue(withIdentifier: "thankYou", sender: nil)
-    }
-    return true
-  }
-
-
-  /// Dismisses the keyboard in response to a tap gesture.
-  ///
-  /// - parameter sender: The tap gesture recognizer.
-  @IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
-    view.endEditing(true)
   }
 }

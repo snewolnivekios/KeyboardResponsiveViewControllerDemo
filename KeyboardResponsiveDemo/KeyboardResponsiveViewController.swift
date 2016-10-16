@@ -22,7 +22,6 @@ import UIKit
 
 /// A view controller that animates the active text field into view if obscured by the keyboard.
 class KeyboardResponsiveViewController: UIViewController, UITextFieldDelegate {
-
   
   /// The text field currently identified as the view's first responder, or `nil` if there is no such first responder.
   var activeTextField: UITextField?
@@ -40,7 +39,7 @@ class KeyboardResponsiveViewController: UIViewController, UITextFieldDelegate {
   }
 
 
-  /// In response to keyboard presentation, animates the active text field into view if obscured by the keyboard.
+  /// In response to keyboard presentation, animates the active text field into view if obscured by the keyboard, and adds a tap gesture recognizer to dismiss the keyboard.
   func keyboardWillShow(_ notification: NSNotification) {
 
     // The distance between the bottom of the text field and the top of the keyboard
@@ -62,15 +61,28 @@ class KeyboardResponsiveViewController: UIViewController, UITextFieldDelegate {
         self.view.frame = viewFrame
       }
     }
+
+    // Add tap gesture recognizer to dismiss keyboard
+    let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard(_:)))
+    view.addGestureRecognizer(tapGestureRecognizer)
   }
 
 
-  /// In response to keyboard dismissal, animates the view back to its original position.
+  /// In response to keyboard dismissal, animates the view back to its original position, and removes the previously added tap gesture recognizer to dismiss the keyboard.
   func keyboardWillHide(_ notification: NSNotification) {
+
+    // Reset the view position
     var vwFrame = view.frame
     vwFrame.origin.y = 0
     UIView.animate(withDuration: 0.5) {
       self.view.frame = vwFrame
+    }
+
+    // Remove tap gesture recognizer
+    if let tapGestureRecognizers = view.gestureRecognizers?.flatMap( {$0 as? UITapGestureRecognizer} ) {
+      for gr in tapGestureRecognizers {
+        gr.removeTarget(self, action: #selector(dismissKeyboard(_:)))
+      }
     }
   }
 
@@ -92,6 +104,12 @@ class KeyboardResponsiveViewController: UIViewController, UITextFieldDelegate {
   func deactivateKeyboardResponsiveTextFields() {
     NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
     NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+  }
+
+
+  /// Dismisses the keyboard in response to a tap gesture.
+  func dismissKeyboard(_ sender: UITapGestureRecognizer) {
+    view.endEditing(true)
   }
 
 

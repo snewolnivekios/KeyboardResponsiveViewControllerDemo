@@ -16,6 +16,7 @@
 		DC9D82BC1DB26C5C000FFD3B /* KeyboardResponsiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9D82BB1DB26C5C000FFD3B /* KeyboardResponsiveViewController.swift */; };
 		DCE49B661DB28EA500F89348 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = DCE49B641DB28EA500F89348 /* LICENSE.txt */; };
 		DCE49B671DB28EA500F89348 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = DCE49B651DB28EA500F89348 /* README.md */; };
+		DCE49B6B1DB3CF5100F89348 /* TextFieldAdvancing.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE49B6A1DB3CF5100F89348 /* TextFieldAdvancing.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		DC9D82BB1DB26C5C000FFD3B /* KeyboardResponsiveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardResponsiveViewController.swift; sourceTree = "<group>"; };
 		DCE49B641DB28EA500F89348 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = SOURCE_ROOT; };
 		DCE49B651DB28EA500F89348 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		DCE49B6A1DB3CF5100F89348 /* TextFieldAdvancing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldAdvancing.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				DC3A7B561DB24822009F1C4E /* ContactViewController.swift */,
 				DC1B1B611DB262D300657FBA /* SecurityViewController.swift */,
 				DC9D82BB1DB26C5C000FFD3B /* KeyboardResponsiveViewController.swift */,
+				DCE49B6A1DB3CF5100F89348 /* TextFieldAdvancing.swift */,
 				DC3A7B581DB24822009F1C4E /* Main.storyboard */,
 				DC3A7B5B1DB24822009F1C4E /* Assets.xcassets */,
 				DC3A7B5D1DB24822009F1C4E /* LaunchScreen.storyboard */,
@@ -155,6 +158,7 @@
 				DCE49B671DB28EA500F89348 /* README.md in Sources */,
 				DC1B1B621DB262D300657FBA /* SecurityViewController.swift in Sources */,
 				DC9D82BC1DB26C5C000FFD3B /* KeyboardResponsiveViewController.swift in Sources */,
+				DCE49B6B1DB3CF5100F89348 /* TextFieldAdvancing.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

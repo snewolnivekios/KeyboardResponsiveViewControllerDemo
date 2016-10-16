@@ -23,9 +23,13 @@ import UIKit
 
 // MARK: - Keyboard Responsive View Controller Extension
 
+// WHAT THIS EXTENSION DOES
+// Adds behavior to UIViewController to reposition its non-scrolling view such that the active text field remains in view when it would otherwise be obscured by the keyboard.
+//
+// If the view controller conforms to `TextFieldAdvancing`, this extension fulfills the `UITextFieldDelegate` requirement of that protocol, automatically registering the controller as a `UITextFieldDelegate` for each text field after it has become the first responder.
+//
 // HOW TO USE THIS EXTENSION
-// 
-// 1. Add a call to activateKeyboardResponsiveTextFields() in viewdidAppear().
+// 1. In your view controller, add a call to activateKeyboardResponsiveTextFields() in viewdidAppear().
 // 2. Add a call to deactivateKeyboardResponsiveTextFields() in viewWillDisappear().
 // 3. Add a call to view.endEditing(true) in viewWillDisappear().
 
@@ -71,6 +75,11 @@ extension UIViewController {
       UIView.animate(withDuration: 0.5) {
         self.view.frame = viewFrame
       }
+
+      // Register self as this text field's delegate (for use with TextFieldAdvancing protocol)
+      if self is TextFieldAdvancing, let delegate = self as? UITextFieldDelegate {
+        activeTextField.delegate = delegate
+      }
     }
 
     // Add tap gesture recognizer to dismiss keyboard
@@ -94,6 +103,12 @@ extension UIViewController {
       for gr in tapGestureRecognizers {
         gr.removeTarget(self, action: #selector(dismissKeyboard(_:)))
       }
+    }
+
+    // Unregister as a text field delegate
+    if self is TextFieldAdvancing, let activeTextField = activeTextField(within: view),
+      let _ = self as? UITextFieldDelegate {
+      activeTextField.delegate = nil
     }
   }
 

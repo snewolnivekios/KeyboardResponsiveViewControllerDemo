@@ -22,9 +22,9 @@ import UIKit
 
 /// A conforming `UIViewController` gains a text field auto-advance functionality.
 ///
-/// Provided the controller is registered as a `UITextFieldDelegate` for the active text field, the user tapping the Enter key (however it's labeled) will advance the focus to the next text field as identified by their `tag` values. For the last text field in the sequence, the controller will advance to the next scene via the segue given by `textFieldSegueIdentifier`.
+/// Provided the controller is registered as a `UITextFieldDelegate` for the active text field, the user tapping the Enter key (however it's labeled) will advance the focus to the next text field as identified by their `tag` values. For the last text field in the sequence, the controller will advance to the next scene via the segue given by `textFieldSegueIdentifier`, if defined; otherwise, it will take no action.
 ///
-/// - note: The text fields in the storyboard scene must be configured with sequential, contiguous Tag values. The controller must also be assigned as each text field's delegate (this is included as part of the `KeyboardResponsiveViewController.swift` extension).
+/// - note: The text fields in the storyboard scene must be configured with sequential, contiguous Tag values. The controller must also be assigned as each text field's delegate.
 @objc protocol TextFieldAdvancing: UITextFieldDelegate { // @objc designation required in order for conforming view controller to be recognized as a UITextFieldDelegate
   var textFieldSegueIdentifier: String? { get }
 }
@@ -57,5 +57,4 @@ extension UIViewController {
       }
     }
   }
-
 }

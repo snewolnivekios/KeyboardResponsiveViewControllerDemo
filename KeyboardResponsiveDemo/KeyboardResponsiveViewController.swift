@@ -76,7 +76,7 @@ extension UIViewController {
         self.view.frame = viewFrame
       }
 
-      // Register self as this text field's delegate (for use with TextFieldAdvancing protocol)
+      // Register self as this text field's delegate
       if self is TextFieldAdvancing, let delegate = self as? UITextFieldDelegate {
         activeTextField.delegate = delegate
       }
@@ -88,7 +88,7 @@ extension UIViewController {
   }
 
 
-  /// In response to keyboard dismissal, animates the view back to its original position and removes the previously added tap gesture recognizer to dismiss the keyboard.
+  /// In response to keyboard dismissal, animates the view back to its original position, unregisters as a delegate of the active text field, and removes the previously added tap gesture recognizer to dismiss the keyboard.
   func keyboardWillHide(_ notification: NSNotification) {
 
     // Reset the view position
@@ -98,17 +98,17 @@ extension UIViewController {
       self.view.frame = vwFrame
     }
 
+    // Unregister as a text field delegate
+    if self is TextFieldAdvancing, let activeTextField = activeTextField(within: view),
+      let _ = self as? UITextFieldDelegate {
+      activeTextField.delegate = nil
+    }
+
     // Remove tap gesture recognizer
     if let tapGestureRecognizers = view.gestureRecognizers?.flatMap( {$0 as? UITapGestureRecognizer} ) {
       for gr in tapGestureRecognizers {
         gr.removeTarget(self, action: #selector(dismissKeyboard(_:)))
       }
-    }
-
-    // Unregister as a text field delegate
-    if self is TextFieldAdvancing, let activeTextField = activeTextField(within: view),
-      let _ = self as? UITextFieldDelegate {
-      activeTextField.delegate = nil
     }
   }
 
